@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import browserHistory from "react-router/lib/browserHistory";
 import {isEmpty, get} from 'lodash'
+import Link from 'react-router/lib/Link'
 import RaisedButton from 'material-ui/RaisedButton';
 import {usersList} from '../actions/userList'
 
@@ -26,16 +27,17 @@ const styles = {
 
 class HomeContainer extends React.Component {
   state = {
-    userListPage : 1,
+    userListStartIndex:0,
+    userListEndIndex:0,
+    userList: []
   }
-  componentDidMount () {
+  componentDidMount = async()=> {
     // /isEmpty(this.props.userToken) && browserHistory.push('login')
-    this.usersData(this.state.userListPage)
+    await this.usersData(this.state.userListPage)
   }
 
   usersData(pageIndex){
-
-     fetch(`https://5b795e7cfb11c8001453625c.mockapi.io/api/v1/usersPage${pageIndex}`, {
+     fetch(`https://5b795e7cfb11c8001453625c.mockapi.io/api/v1/users`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -46,35 +48,55 @@ class HomeContainer extends React.Component {
         this.props.usersList(data)
       });
   }
+  deleteUser = (id) =>{
+    fetch(`https://5b795e7cfb11c8001453625c.mockapi.io/api/v1/users/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }
+    }).then(response => response.json())
+      .then(data => {
+        console.log('***********',data)
+      });
+
+  }
 
 
   render () {
     return !isEmpty(this.props.users) && <div className="col-xs-12" id="user-home">
         <div className="col-xs-12 user-info list-header">
-          <div className="col-xs-1">Avtar</div>
-          <div className="col-xs-1">First Name </div>
-          <div className="col-xs-1">Last Name </div>
-          <div className="col-xs-1">Gender </div>
-          <div className="col-xs-1">Age</div>
-          <div className="col-xs-2">Email </div>
-          <div className="col-xs-2">Contact</div>
+          <div className="col-xs-10 p-0">
+            <div className="col-xs-1">Avtar</div>
+            <div className="col-xs-1">First Name </div>
+            <div className="col-xs-1">Last Name </div>
+            <div className="col-xs-1">Gender </div>
+            <div className="col-xs-2">Age</div>
+            <div className="col-xs-2">Email </div>
+            <div className="col-xs-2">Contact</div>
+          </div>
           <div className="col-xs-1">Edit</div>
           <div className="col-xs-1">Delete</div>
         </div>
         {
           this.props.users.map((user, index)=>{
             return <div key={index} className="col-xs-12 user-info">
-              <div className="col-xs-1"><img className="pl-5 pr-5" src={user.avatar} height={30} width={40}/></div>
-              <div className="col-xs-1">{user.first_name} </div>
-              <div className="col-xs-1">{user.last_name} </div>
-              <div className="col-xs-1">{parseInt(user.gender) ? 'Male' : 'Female'} </div>
-              <div className="col-xs-1">{user.dob} </div>
-              <div className="col-xs-2">{user.email} </div>
-              <div className="col-xs-2">{user.mobile} </div>
+              <div className="col-xs-10 p-0">
+                <Link to={`/user/${user.id}`}>
+                  <div className="col-xs-1"><img className="pl-5 pr-5" src={user.avatar} height={30} width={40}/></div>
+                  <div className="col-xs-1">{user.first_name} </div>
+                  <div className="col-xs-1">{user.last_name} </div>
+                  <div className="col-xs-1">{parseInt(user.gender) ? 'Male' : 'Female'} </div>
+                  <div className="col-xs-2">{user.dob} </div>
+                  <div className="col-xs-2">{user.email} </div>
+                  <div className="col-xs-2">{user.mobile} </div>
+                </Link>
+              </div>
+
               <div className="col-xs-1">
                 <i className="fa fa-pencil-square-o" aria-hidden="true" />
               </div>
-              <div className="col-xs-1"><i className="fa fa-trash" aria-hidden="true" /></div>
+              <div className="col-xs-1" onClick={()=>{this.deleteUser(user.id)}}><i className="fa fa-trash" aria-hidden="true" /></div>
             </div>
           })
         }

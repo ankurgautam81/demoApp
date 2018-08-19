@@ -24,9 +24,9 @@ export default {
       }
     },
     {
-      path: 'engineering/:boardName/:id',
+      path: 'user/:id',
       getComponent(location, cb) {
-        import('../pages/Streams').then(loadRoute(cb)).catch(errorLoading)
+        import('../pages/user').then(loadRoute(cb)).catch(errorLoading)
       }
     },
     {
