@@ -28,7 +28,7 @@ const styles = {
 class HomeContainer extends React.Component {
   state = {
     userListStartIndex:0,
-    userListEndIndex:0,
+    userListEndIndex:19,
     userList: []
   }
   componentDidMount = async()=> {
@@ -36,7 +36,7 @@ class HomeContainer extends React.Component {
     await this.usersData(this.state.userListPage)
   }
 
-  usersData(pageIndex){
+  usersData(){
      fetch(`https://5b795e7cfb11c8001453625c.mockapi.io/api/v1/users`, {
       method: 'GET',
       headers: {
@@ -57,7 +57,7 @@ class HomeContainer extends React.Component {
       }
     }).then(response => response.json())
       .then(data => {
-        console.log('***********',data)
+        this.usersData(this.state.userListPage)
       });
 
   }
@@ -66,7 +66,7 @@ class HomeContainer extends React.Component {
   render () {
     return !isEmpty(this.props.users) && <div className="col-xs-12 p-0" id="user-home">
         <div className="col-xs-12 text-center">User List</div>
-        <div className="col-xs-12 user-info list-header hidden-xs hidden-sm">
+        <div className="col-xs-12 user-info  text-center list-header hidden-xs hidden-sm">
           <div className="col-xs-10 p-0">
             <div className="col-xs-2">Avtar</div>
             <div className="col-xs-1">First Name </div>
@@ -81,10 +81,11 @@ class HomeContainer extends React.Component {
         </div>
         {
           this.props.users.map((user, index)=>{
+
             return <div key={index} className="col-xs-12 user-info text-center p-0">
               <Link to={`/user/${user.id}`}>
               <div className="col-xs-12 col-sm-10 p-0">
-                  <div className="col-xs-12 col-md-2 col-lg-2 p-0"><img className="pl-5 pr-5 img-responsive" src={user.avatar}/></div>
+                  <div className="col-xs-12 col-md-2 col-lg-2 p-0 text-center"><img style={{margin:'auto'}} className="pl-5 pr-5 img-responsive" src={user.avatar}/></div>
                 <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">First Name: </div>
                 <div className="col-xs-6 col-md-1 col-lg-1 p-0">{user.first_name} </div>
                 <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">Last Name: </div>
@@ -111,7 +112,7 @@ class HomeContainer extends React.Component {
           })
         }
 
-        <div className="col-xs-12 text-center font-white">
+        {/*<div className="col-xs-12 text-center font-white">
           <div className="col-xs-6">
             <RaisedButton
               backgroundColor="#fc7f94"
@@ -133,7 +134,7 @@ class HomeContainer extends React.Component {
               Next <i className="fa fa-chevron-right" aria-hidden="true"/>
             </RaisedButton>
           </div>
-        </div>
+        </div>*/}
       </div>
 
   }
