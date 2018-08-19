@@ -1,0 +1,13 @@
+.user-info{
+    padding: 10px;
+    border-bottom: 1px solid;
+    margin-bottom: 10px;
+}
+.list-header{
+    font-size: 15px;
+    font-weight: 700;
+}
+.user-detail{
+    padding: 10px;
+
+}
