@@ -14,11 +14,11 @@ class ShellContainer extends React.Component {
   render() {
     const navigation = this.props.children.props.children.props
     return (
-      <div id="shell-container">
+      <div id="shell-container" className="col-xs-12">
         {
           navigation.location.pathname !== '/login' &&  <DesktopNavBar/>
         }
-        <div className="child-container">
+        <div className="col-xs-12 child-container">
           {this.props.children}
         </div>
       </div>
