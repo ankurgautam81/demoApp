@@ -8,14 +8,12 @@
     margin-left: auto;
 }
 .child-container {
-    margin-top: 50px;
+    margin-top: 70px;
     padding-top: 20px;
     margin-bottom: 50px;
 }
 @media only screen and (min-width: 768px) {
-    .child-container {
-        width: 1000px;
-    }
+
 }
 .navbar-inverse .navbar-nav>li>a {
     color: #fff;
@@ -53,6 +51,12 @@
 .text-center{
     text-align: center;
 }
+.text-left{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
+}
 .font-white{
     color: #ffffff;
 }
@@ -61,5 +65,9 @@
 }
 .box-shadow{
     box-shadow: 1px 0px 8px #ccc;
+}
+
+.paddingTopBottom-20{
+    padding: 20px 0;
 }
 

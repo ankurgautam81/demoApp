@@ -26,7 +26,13 @@ export default {
     {
       path: 'user/:id',
       getComponent(location, cb) {
-        import('../pages/user').then(loadRoute(cb)).catch(errorLoading)
+        import('../pages/Users').then(loadRoute(cb)).catch(errorLoading)
+      }
+    },
+    {
+      path: 'add-edit-user',
+      getComponent(location, cb) {
+        import('../pages/AddEditUser').then(loadRoute(cb)).catch(errorLoading)
       }
     },
     {

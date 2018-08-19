@@ -25,7 +25,7 @@ const styles = {
   }
 }
 
-class user extends React.Component {
+class Users extends React.Component {
   state = {
     userListStartIndex:0,
     userListEndIndex:0,
@@ -110,5 +110,5 @@ function mapDispatchToProps (dispatch) {
 
   }
 }
-export { user }
-export default connect(mapStateToProps, mapDispatchToProps)(user)
+export { Users }
+export default connect(mapStateToProps, mapDispatchToProps)(Users)

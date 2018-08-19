@@ -13,7 +13,7 @@ class App extends React.Component {
   render() {
     return (
       <ShellContainer>
-        <div className="col-xs-12">
+        <div className="col-xs-12 p-0">
           {this.props.children}
         </div>
       </ShellContainer>

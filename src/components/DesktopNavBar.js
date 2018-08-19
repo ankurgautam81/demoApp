@@ -9,14 +9,14 @@ const DesktopNavBar = ({ urlPath, toggleSubMenu, showSubMenu, selected, showSubm
     <Navbar inverse collapseOnSelect fixedTop>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link className="navbar-brand" to="/"><span className="study_nav">DEMO </span><span className="hub_nav">PROJECT</span></Link>
+          <Link className="navbar-brand" to="/"><span className="study_nav">HOME </span><span className="hub_nav">PROJECT</span></Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
           <Navbar.Brand>
-            <Link className="navbar-brand" to="/"><span className="study_nav">ADD USER </span></Link>
+            <Link className="navbar-brand" to={`/add-edit-user`}><span className="study_nav">ADD USER </span></Link>
           </Navbar.Brand>
         </Nav>
       </Navbar.Collapse>

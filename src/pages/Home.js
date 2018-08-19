@@ -64,10 +64,11 @@ class HomeContainer extends React.Component {
 
 
   render () {
-    return !isEmpty(this.props.users) && <div className="col-xs-12" id="user-home">
-        <div className="col-xs-12 user-info list-header">
+    return !isEmpty(this.props.users) && <div className="col-xs-12 p-0" id="user-home">
+        <div className="col-xs-12 text-center">User List</div>
+        <div className="col-xs-12 user-info list-header hidden-xs hidden-sm">
           <div className="col-xs-10 p-0">
-            <div className="col-xs-1">Avtar</div>
+            <div className="col-xs-2">Avtar</div>
             <div className="col-xs-1">First Name </div>
             <div className="col-xs-1">Last Name </div>
             <div className="col-xs-1">Gender </div>
@@ -80,23 +81,32 @@ class HomeContainer extends React.Component {
         </div>
         {
           this.props.users.map((user, index)=>{
-            return <div key={index} className="col-xs-12 user-info">
-              <div className="col-xs-10 p-0">
-                <Link to={`/user/${user.id}`}>
-                  <div className="col-xs-1"><img className="pl-5 pr-5" src={user.avatar} height={30} width={40}/></div>
-                  <div className="col-xs-1">{user.first_name} </div>
-                  <div className="col-xs-1">{user.last_name} </div>
-                  <div className="col-xs-1">{parseInt(user.gender) ? 'Male' : 'Female'} </div>
-                  <div className="col-xs-2">{user.dob} </div>
-                  <div className="col-xs-2">{user.email} </div>
-                  <div className="col-xs-2">{user.mobile} </div>
-                </Link>
-              </div>
+            return <div key={index} className="col-xs-12 user-info text-center p-0">
+              <Link to={`/user/${user.id}`}>
+              <div className="col-xs-12 col-sm-10 p-0">
+                  <div className="col-xs-12 col-md-2 col-lg-2 p-0"><img className="pl-5 pr-5 img-responsive" src={user.avatar}/></div>
+                <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">First Name: </div>
+                <div className="col-xs-6 col-md-1 col-lg-1 p-0">{user.first_name} </div>
+                <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">Last Name: </div>
+                  <div className="col-xs-6 col-md-1 col-lg-1 p-0">{user.last_name} </div>
+                <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">Gender: </div>
+                  <div className="col-xs-6 col-md-1 col-lg-1 p-0">{parseInt(user.gender) ? 'Male' : 'Female'} </div>
+                <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">Age: </div>
+                  <div className="col-xs-6 col-md-2 col-lg-2 p-0">{user.dob} </div>
+                <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">Email: </div>
+                  <div className="col-xs-6 col-md-2 col-lg-2 p-0">{user.email} </div>
+                <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">Mobile: </div>
+                  <div className="col-xs-6 col-md-2 col-lg-2 p-0">{user.mobile} </div>
 
-              <div className="col-xs-1">
-                <i className="fa fa-pencil-square-o" aria-hidden="true" />
               </div>
-              <div className="col-xs-1" onClick={()=>{this.deleteUser(user.id)}}><i className="fa fa-trash" aria-hidden="true" /></div>
+              </Link>
+              <Link to={`/add-edit-user?userId=${user.id}`}>
+                <div className="col-xs-6 col-md-1 col-lg-1">
+                  <i className="fa fa-pencil-square-o" aria-hidden="true" />
+                </div>
+              </Link>
+
+              <div className="col-xs-6 col-md-1 col-lg-1" onClick={()=>{this.deleteUser(user.id)}}><i className="fa fa-trash" aria-hidden="true" /></div>
             </div>
           })
         }
