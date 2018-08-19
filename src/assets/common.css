@@ -1,0 +1,52 @@
+#shell-container{
+    overflow-x: hidden;
+}
+.top-navbar,
+.child-container {
+    cursor: pointer;
+    margin-right: auto;
+    margin-left: auto;
+}
+.child-container {
+    margin-top: 50px;
+}
+@media only screen and (min-width: 768px) {
+    .child-container {
+        width: 1000px;
+    }
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+}
+.navbar-nav {
+    float: right;
+    margin: 0;
+}
+.navbar-inverse {
+    background-color: #117A65;
+    border-color: #117A65;
+    box-shadow: 0px 4px 5px #ccc;
+}
+
+.study_nav{
+    color: bisque;
+    font-size: 20px;
+    font-weight: 600;
+}
+.hub_nav{
+    color: aliceblue;
+    font-size: 20px;
+    font-weight: 600;
+}
+.mob-navbar{
+    position: fixed;
+    zIndex: '1030';
+    top: 0;
+    background-color: #117A65;
+    border-color: #117A65;
+    box-shadow: 0px 4px 5px #ccc;
+}
+
+
