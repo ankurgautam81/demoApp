@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import browserHistory from "react-router/lib/browserHistory";
-import {isEmpty, get} from 'lodash'
+import {isEmpty, get, slice} from 'lodash'
 import Link from 'react-router/lib/Link'
 import RaisedButton from 'material-ui/RaisedButton';
 import {usersList} from '../actions/userList'
@@ -46,6 +46,9 @@ class HomeContainer extends React.Component {
     }).then(response => response.json())
       .then(data => {
         this.props.usersList(data)
+        this.setState({
+          userList: slice(data, this.state.userListStartIndex,this.state.userListEndIndex)
+        })
       });
   }
   deleteUser = (id) =>{
@@ -62,9 +65,23 @@ class HomeContainer extends React.Component {
 
   }
 
+  userArray = (type) =>{
+
+      this.setState({
+        userListStartIndex: type === 'next' ? parseInt(this.state.userListStartIndex) + 19 : parseInt(this.state.userListStartIndex) - 19,
+
+        userListEndIndex : type === 'next' ? parseInt(this.state.userListEndIndex) + 19 : parseInt(this.state.userListEndIndex) - 19,
+      },()=>{
+        this.setState({
+          userList: slice(this.props.users, this.state.userListStartIndex,this.state.userListEndIndex)
+        })
+      })
+
+  }
+
 
   render () {
-    return !isEmpty(this.props.users) && <div className="col-xs-12 p-0" id="user-home">
+    return !isEmpty(this.state.userList) && <div className="col-xs-12 p-0" id="user-home">
         <div className="col-xs-12 text-center">User List</div>
         <div className="col-xs-12 user-info  text-center list-header hidden-xs hidden-sm">
           <div className="col-xs-10 p-0">
@@ -80,7 +97,7 @@ class HomeContainer extends React.Component {
           <div className="col-xs-1">Delete</div>
         </div>
         {
-          this.props.users.map((user, index)=>{
+          this.state.userList.map((user, index)=>{
 
             return <div key={index} className="col-xs-12 user-info text-center p-0">
               <Link to={`/user/${user.id}`}>
@@ -112,29 +129,31 @@ class HomeContainer extends React.Component {
           })
         }
 
-        {/*<div className="col-xs-12 text-center font-white">
+        <div className="col-xs-12 text-center font-white">
           <div className="col-xs-6">
             <RaisedButton
               backgroundColor="#fc7f94"
               style={{color:'#ffffff'}}
+              disabled={this.state.userListStartIndex === 0}
               disabledBackgroundColor="#E5E5E5"
               disabledLabelColor="#CACACA"
               rippleStyle={{opacity: 0.5}}
-              onClick={()=>this.loginUser()}>
+              onClick={()=>this.userArray('prev')}>
               <i className="fa fa-chevron-left" aria-hidden="true"/> Prev
             </RaisedButton>
           </div>
           <div className="col-xs-6">
             <RaisedButton backgroundColor="#fc7f94"
                           style={{color:'#ffffff'}}
+                          disabled={this.state.userListEndIndex >= this.props.users.length}
                           disabledBackgroundColor="#E5E5E5"
                           disabledLabelColor="#CACACA"
                           rippleStyle={{opacity: 0.5}}
-                          onClick={()=>this.loginUser()}>
+                          onClick={()=>this.userArray('next')}>
               Next <i className="fa fa-chevron-right" aria-hidden="true"/>
             </RaisedButton>
           </div>
-        </div>*/}
+        </div>
       </div>
 
   }
