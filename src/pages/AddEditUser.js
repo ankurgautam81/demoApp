@@ -55,10 +55,7 @@ class AddEditUser extends React.Component {
           email:data.email,
           dob:data.dob,
           mobile:data.mobile,
-          gender:data.gender,
-
-
-
+          gender:data.gender
         })
       });
 
@@ -105,7 +102,7 @@ class AddEditUser extends React.Component {
 
 
   render () {
-    return (get(this.props, 'location.query.userId',0) && !isEmpty(this.props.user))  ? <div className="col-xs-offset-2 col-xs-8 box-shadow text-center paddingTopBottom-20" id="user-detail">
+    return (get(this.props, 'location.query.userId',0) && !isEmpty(this.props.user))  ? <div className="col-md-offset-2 col-lg-offset-2 col-xs-12 col-md-8 col-lg-8 box-shadow text-center paddingTopBottom-20" id="user-detail">
       <div className="col-xs-12 p-0" >EDIT USER</div>
         <div className="col-xs-12 p-0" >
           <TextField
@@ -176,7 +173,7 @@ class AddEditUser extends React.Component {
       </div>
 
       </div>
-      :<div className="col-xs-offset-2 col-xs-8 box-shadow text-center paddingTopBottom-20" id="user-detail">
+      :<div className="col-md-offset-2 col-lg-offset-2 col-xs-12 col-md-8 col-lg-8 box-shadow text-center paddingTopBottom-20" id="user-detail">
         <div className="col-xs-12 p-0" >ADD USER</div>
         <div className="col-xs-12 p-0" >
           <TextField
