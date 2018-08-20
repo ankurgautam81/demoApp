@@ -32,7 +32,7 @@ class HomeContainer extends React.Component {
     userList: []
   }
   componentDidMount = async()=> {
-    // /isEmpty(this.props.userToken) && browserHistory.push('login')
+    isEmpty(this.props.userToken) && browserHistory.push('login')
     await this.usersData(this.state.userListPage)
   }
 
