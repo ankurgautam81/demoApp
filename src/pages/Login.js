@@ -30,8 +30,10 @@ class Login extends React.Component {
     password : ''
   }
 
-  componentWillReceiveProps(nextProps){
-    !isEmpty(nextProps.userToken) && browserHistory.push('home')
+
+
+  componentDidMount(){
+    !isEmpty(localStorage.getItem("token")) && browserHistory.push('home')
   }
 
   onInputChange = (value, key) => {
@@ -54,6 +56,7 @@ class Login extends React.Component {
     }).then(response => response.json())
       .then(data => {
          this.props.setLogin(data)
+        localStorage.setItem("token", data.token);
       });
   }
 
