@@ -63,11 +63,11 @@ class AddEditUser extends React.Component {
 
   }
 
-  addUser(isUserAdd){
+  addUser = (isUserAdd) =>{
     const url = isUserAdd ? hosturl : hosturl+'/'+parseInt(this.props.location.query.userId)
     console.log('url ==',url)
     const method = isUserAdd ? 'POST' : 'PUT'
-    if( this.state.mobile && this.state.gender && !isEmpty(this.state.email) && !isEmpty(this.state.fname) && !isEmpty(this.state.lname) && !isEmpty(this.state.dob)){
+    if( this.state.mobile && !isEmpty(this.state.email) && !isEmpty(this.state.fname) && !isEmpty(this.state.lname) && !isEmpty(this.state.dob)){
 
       fetch(url, {
         method: method,
@@ -80,7 +80,7 @@ class AddEditUser extends React.Component {
           email:this.state.email,
           first_name:this.state.fname,
           last_name:this.state.lname,
-          gender:this.refs.signupGender.state.selected,
+          gender: this.refs.signupGender.state.selected,
           dob:this.state.dob
         })
       }).then(response => response.json())
@@ -156,7 +156,7 @@ class AddEditUser extends React.Component {
         />
       </div>
       <div className="col-xs-12 p-0" >
-        <RadioButtonGroup name="signup-gender" id="signup-gender" defaultSelected={this.state.gender} ref="signupGender" className="signup-gender" style={{display: 'inline-flex'}} >
+        <RadioButtonGroup name="signup-gender" id="signup-gender" defaultSelected={parseInt(this.state.gender)} ref="signupGender" className="signup-gender" style={{display: 'inline-flex'}} >
           <RadioButton
             value={1}
             label="Male"
@@ -229,7 +229,7 @@ class AddEditUser extends React.Component {
           />
         </div>
         <div className="col-xs-12 p-0" >
-          <RadioButtonGroup name="signup-gender" id="signup-gender" defaultSelected={1} ref="signupGender" className="signup-gender" style={{display: 'inline-flex'}} >
+          <RadioButtonGroup name="edit-gender" id="edit-gender" defaultSelected={parseInt(this.state.gender)} ref="signupGender" className="edit-gender" style={{display: 'inline-flex'}} >
             <RadioButton
               value={1}
               label="Male"
