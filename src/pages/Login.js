@@ -59,12 +59,13 @@ class Login extends React.Component {
 
   render () {
     return (
-      <div className="login-container">
+      <div className="col-sm-offset-2 col-md-offset-4 col-lg-offset-4 col-xs-12 col-sm-8 col-md-4 login-container">
+        <div className="col-xs-12 text-center">Login</div>
         <TextField
           hintText="Login"
           underlineFocusStyle={styles.underlineFocusStyle}
           onChange={event => this.onInputChange(event.target.value, 'loginId')}
-        />
+        /><br/>
         <TextField
           hintText="Password"
           type="password"
