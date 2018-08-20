@@ -6,6 +6,7 @@ import browserHistory from "react-router/lib/browserHistory";
 import {isEmpty, get} from 'lodash'
 import Link from 'react-router/lib/Link'
 import RaisedButton from 'material-ui/RaisedButton';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import {userInfo} from '../actions/userList'
 const hosturl = 'https://5b795e7cfb11c8001453625c.mockapi.io/api/v1/users'
 
@@ -32,7 +33,8 @@ class AddEditUser extends React.Component {
   state = {
     userListStartIndex:0,
     userListEndIndex:0,
-    userList: []
+    userList: [],
+    gender:1
   }
   componentDidMount = async()=> {
     const userId = get(this.props, 'location.query.userId',0)
@@ -55,20 +57,17 @@ class AddEditUser extends React.Component {
           email:data.email,
           dob:data.dob,
           mobile:data.mobile,
-          gender:data.gender,
-
-
-
+          gender:data.gender
         })
       });
 
   }
 
-  addUser(isUserAdd){
+  addUser = (isUserAdd) =>{
     const url = isUserAdd ? hosturl : hosturl+'/'+parseInt(this.props.location.query.userId)
     console.log('url ==',url)
     const method = isUserAdd ? 'POST' : 'PUT'
-    if( this.state.mobile && this.state.gender && !isEmpty(this.state.email) && !isEmpty(this.state.fname) && !isEmpty(this.state.lname) && !isEmpty(this.state.dob)){
+    if( this.state.mobile && !isEmpty(this.state.email) && !isEmpty(this.state.fname) && !isEmpty(this.state.lname) && !isEmpty(this.state.dob)){
 
       fetch(url, {
         method: method,
@@ -81,7 +80,7 @@ class AddEditUser extends React.Component {
           email:this.state.email,
           first_name:this.state.fname,
           last_name:this.state.lname,
-          gender:this.state.gender,
+          gender: this.refs.signupGender.state.selected,
           dob:this.state.dob
         })
       }).then(response => response.json())
@@ -105,7 +104,7 @@ class AddEditUser extends React.Component {
 
 
   render () {
-    return (get(this.props, 'location.query.userId',0) && !isEmpty(this.props.user))  ? <div className="col-xs-offset-2 col-xs-8 box-shadow text-center paddingTopBottom-20" id="user-detail">
+    return (get(this.props, 'location.query.userId',0) && !isEmpty(this.props.user))  ? <div className="col-md-offset-2 col-lg-offset-2 col-xs-12 col-md-8 col-lg-8 box-shadow text-center paddingTopBottom-20" id="user-detail">
       <div className="col-xs-12 p-0" >EDIT USER</div>
         <div className="col-xs-12 p-0" >
           <TextField
@@ -146,15 +145,7 @@ class AddEditUser extends React.Component {
             value={this.state.email}
           />
         </div>
-      <div className="col-xs-12 p-0" >
-        <TextField
-          id="edit-user-gender"
-          hintText="Gender"
-          underlineFocusStyle={styles.underlineFocusStyle}
-          onChange={event => this.onInputChange(event.target.value, 'gender')}
-          value={this.state.gender}
-        />
-      </div>
+
       <div className="col-xs-12 p-0" >
         <TextField
           id="edit-user-dob"
@@ -163,6 +154,22 @@ class AddEditUser extends React.Component {
           type="date"
           value={this.state.dob}
         />
+      </div>
+      <div className="col-xs-12 p-0" >
+        <RadioButtonGroup name="signup-gender" id="signup-gender" defaultSelected={parseInt(this.state.gender)} ref="signupGender" className="signup-gender" style={{display: 'inline-flex'}} >
+          <RadioButton
+            value={1}
+            label="Male"
+            iconStyle={styles.icon}
+            labelStyle={styles.label}
+          />
+          <RadioButton
+            value={0}
+            label="Female"
+            iconStyle={styles.icon}
+            labelStyle={styles.label}
+          />
+        </RadioButtonGroup>
       </div>
       <div className="col-xs-12">
         <RaisedButton backgroundColor="#fc7f94"
@@ -176,7 +183,7 @@ class AddEditUser extends React.Component {
       </div>
 
       </div>
-      :<div className="col-xs-offset-2 col-xs-8 box-shadow text-center paddingTopBottom-20" id="user-detail">
+      :<div className="col-md-offset-2 col-lg-offset-2 col-xs-12 col-md-8 col-lg-8 box-shadow text-center paddingTopBottom-20" id="user-detail">
         <div className="col-xs-12 p-0" >ADD USER</div>
         <div className="col-xs-12 p-0" >
           <TextField
@@ -212,14 +219,7 @@ class AddEditUser extends React.Component {
             type="email"
           />
         </div>
-        <div className="col-xs-12 p-0" >
-          <TextField
-            id="user-gender"
-            hintText="Gender"
-            underlineFocusStyle={styles.underlineFocusStyle}
-            onChange={event => this.onInputChange(event.target.value, 'gender')}
-          />
-        </div>
+
         <div className="col-xs-12 p-0" >
           <TextField
             id="user-dob"
@@ -227,6 +227,24 @@ class AddEditUser extends React.Component {
             onChange={event => this.onInputChange(event.target.value, 'dob')}
             type="date"
           />
+        </div>
+        <div className="col-xs-12 p-0" >
+          <RadioButtonGroup name="edit-gender" id="edit-gender" defaultSelected={parseInt(this.state.gender)} ref="signupGender" className="edit-gender" style={{display: 'inline-flex'}} >
+            <RadioButton
+              value={1}
+              label="Male"
+              iconStyle={styles.icon}
+              labelStyle={styles.label}
+              onChange={event => this.onInputChange(event.target.value, 'gender')}
+            />
+            <RadioButton
+              value={0}
+              label="Female"
+              iconStyle={styles.icon}
+              labelStyle={styles.label}
+              onChange={event => this.onInputChange(event.target.value, 'gender')}
+            />
+          </RadioButtonGroup>
         </div>
         <div className="col-xs-12">
           <RaisedButton backgroundColor="#fc7f94"

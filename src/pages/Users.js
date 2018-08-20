@@ -33,8 +33,6 @@ class Users extends React.Component {
   }
   componentDidMount = async()=> {
     const userId = get(this.props, 'params.id',0)
-    console.log('*******login',get(this.props, 'params.id',0))
-
     userId && await this.userData(userId)
   }
 
@@ -54,37 +52,34 @@ class Users extends React.Component {
 
   render () {
     return !isEmpty(this.props.user) && <div className="col-xs-12 box-shadow user-detail" id="user-detail">
-        <div className="col-xs-2">
+        <div className="col-xs-12 col-md-2">
           <img className="pl-5 pr-5" src={this.props.user.avatar}/>
         </div>
-        <div className="col-xs-10">
-          <div className="col-xs-10">
-            <div  className="col-xs-2 p-0">Name: </div>
-            <div  className="col-xs-10">{this.props.user.first_name+' '+ this.props.user.last_name}</div>
+        <div className="col-xs-12 col-md-10 p-0">
+          <div className="col-xs-12 p-0">
+            <div  className="col-xs-3 p-0">Name: </div>
+            <div  className="col-xs-9">{this.props.user.first_name+' '+ this.props.user.last_name}</div>
           </div>
-          <div className="col-xs-10">
-            <div  className="col-xs-2  p-0">Gender: </div>
-            <div  className="col-xs-10">{parseInt(this.props.user.gender) ? 'Male' : 'Female'}</div>
+          <div className="col-xs-12 p-0">
+            <div  className="col-xs-3  p-0">Gender: </div>
+            <div  className="col-xs-9">{parseInt(this.props.user.gender) ? 'Male' : 'Female'}</div>
           </div>
-          <div className="col-xs-10">
-            <div  className="col-xs-2  p-0">DOB: </div>
-            <div  className="col-xs-10">{this.props.user.dob}</div>
+          <div className="col-xs-12 p-0">
+            <div  className="col-xs-3  p-0">DOB: </div>
+            <div  className="col-xs-9">{this.props.user.dob}</div>
           </div>
-          <div className="col-xs-10">
-            <div  className="col-xs-2  p-0">Email: </div>
-            <div  className="col-xs-10">{this.props.user.email}</div>
+          <div className="col-xs-12 p-0">
+            <div  className="col-xs-3  p-0">Email: </div>
+            <div  className="col-xs-9">{this.props.user.email}</div>
           </div>
-          <div className="col-xs-10">
-            <div  className="col-xs-2  p-0">Mobile: </div>
-            <div  className="col-xs-10">{this.props.user.mobile}</div>
+          <div className="col-xs-12 p-0">
+            <div  className="col-xs-3  p-0">Mobile: </div>
+            <div  className="col-xs-9">{this.props.user.mobile}</div>
           </div>
-          <div className="col-xs-10">
-            <div  className="col-xs-2 p-0">Created At: </div>
-            <div  className="col-xs-10">{this.props.user.createdAt}</div>
+          <div className="col-xs-10 p-0">
+            <div  className="col-xs-3 p-0">Created At: </div>
+            <div  className="col-xs-9">{this.props.user.createdAt}</div>
           </div>
-
-
-
         </div>
 
 
