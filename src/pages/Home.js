@@ -32,7 +32,7 @@ class HomeContainer extends React.Component {
     userList: []
   }
   componentDidMount = async()=> {
-    isEmpty(this.props.userToken) && browserHistory.push('login')
+    isEmpty(localStorage.getItem("token")) && browserHistory.push('login')
     await this.usersData(this.state.userListPage)
   }
 
@@ -102,7 +102,6 @@ class HomeContainer extends React.Component {
             const currentYear = d.getFullYear()
             const birthYear = split(user.dob, '-',1).toString();
             const AGE = parseInt(currentYear) - parseInt(birthYear)
-            console.log(AGE)
 
             return <div key={index} className="col-xs-12 user-info text-center p-0">
               <Link to={`/user/${user.id}`}>
