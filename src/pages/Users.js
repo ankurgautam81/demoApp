@@ -80,9 +80,6 @@ class Users extends React.Component {
             <div  className="col-xs-3 p-0">Created At: </div>
             <div  className="col-xs-9">{this.props.user.createdAt}</div>
           </div>
-
-
-
         </div>
 
 
