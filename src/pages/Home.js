@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import browserHistory from "react-router/lib/browserHistory";
-import {isEmpty, get, slice} from 'lodash'
+import {isEmpty, get, slice, split} from 'lodash'
 import Link from 'react-router/lib/Link'
 import RaisedButton from 'material-ui/RaisedButton';
 import {usersList} from '../actions/userList'
@@ -98,6 +98,11 @@ class HomeContainer extends React.Component {
         </div>
         {
           this.state.userList.map((user, index)=>{
+            const d = new Date();
+            const currentYear = d.getFullYear()
+            const birthYear = split(user.dob, '-',1).toString();
+            const AGE = parseInt(currentYear) - parseInt(birthYear)
+            console.log(AGE)
 
             return <div key={index} className="col-xs-12 user-info text-center p-0">
               <Link to={`/user/${user.id}`}>
@@ -110,7 +115,7 @@ class HomeContainer extends React.Component {
                 <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">Gender: </div>
                   <div className="col-xs-6 col-md-1 col-lg-1 p-0">{parseInt(user.gender) ? 'Male' : 'Female'} </div>
                 <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">Age: </div>
-                  <div className="col-xs-6 col-md-2 col-lg-2 p-0">{user.dob} </div>
+                  <div className="col-xs-6 col-md-2 col-lg-2 p-0">{AGE} </div>
                 <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">Email: </div>
                   <div className="col-xs-6 col-md-2 col-lg-2 p-0">{user.email} </div>
                 <div className="col-xs-4 hidden-lg hidden-md p-0 text-right">Mobile: </div>
